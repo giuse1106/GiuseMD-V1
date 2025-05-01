@@ -6,7 +6,6 @@ import path, { join } from 'path'
 import { unwatchFile, watchFile } from 'fs'
 import fs from 'fs'
 import chalk from 'chalk'
-
 /**
  * @type {import('@whiskeysockets/baileys')}
  */
@@ -76,7 +75,7 @@ export async function handler(chatUpdate) {
                 if (!('delete' in chat)) chat.delete = false
                 if (!('gpt' in chat)) chat.gpt = false
                 if (!('bestemmiometro' in chat)) chat.bestemmiometro = true
-                if (!('antielimina' in chat)) chat.antielimina = true
+                if (!('antielimina' in chat)) chat.antielimina = false
                 if (!('antiLink' in chat)) chat.antiLink = true
                 if (!('antiinsta' in chat)) chat.antiinsta = false
                 if (!('antitiktok' in chat)) chat.antitiktok = false
@@ -138,15 +137,15 @@ export async function handler(chatUpdate) {
                 if (!('self' in settings)) settings.self = false
                 if (!('autoread' in settings)) settings.autoread = false
                 if (!('restrict' in settings)) settings.restrict = true
-                if (!('antiCall' in settings)) settings.antiCall = true
-                if (!('antiPrivate' in settings)) settings.antiprivato = true
+                if (!('antiCall' in settings)) settings.antiCall = false
+                if (!('antiPrivate' in settings)) settings.antiprivato = false
                 if (!('jadibot' in settings)) settings.jadibot = true   
             } else global.db.data.settings[this.user.jid] = {
                 self: false,
                 autoread: false,
                 restrict: true,
-                antiCall: true,
-                antiPrivate: true,
+                antiCall: false,
+                antiPrivate: false,
                 jadibot: true,
             }
         } catch (e) {
@@ -509,7 +508,7 @@ export async function participantsUpdate({ id, participants, action }) {
                     } catch (e) {
                     } finally {
                         let apii = await this.getFile(pp)
-                        let nomeDelBot = global.db.data.nomedelbot || `𝐁𝐢𝐱𝐛𝐲𝐁𝐨𝐭-𝐌𝐝 🔮`
+                        let nomeDelBot = global.db.data.nomedelbot || `꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」`
                         text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Benvenuto, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'bot') :
                             (chat.sBye || this.bye || conn.bye || 'Addio, @user!')).replace('@user', '@' + user.split('@')[0])
                         this.sendMessage(id, { 
@@ -519,7 +518,7 @@ export async function participantsUpdate({ id, participants, action }) {
                                 forwardingScore: 99,
                                 isForwarded: true, 
                                forwardedNewsletterMessageInfo: {
-                               newsletterJid: '120363175463922716@newsletter',
+                               newsletterJid: '120363418973546282@newsletter',
                                serverMessageId: '', newsletterName: `${nomeDelBot}` },
                                externalAdReply: {
                                     "title": `${action === 'add' ? '𝐌𝐞𝐬𝐬𝐚𝐠𝐠𝐢𝐨 𝐝𝐢 𝐛𝐞𝐧𝐯𝐞𝐧𝐮𝐭𝐨' : '𝐌𝐞𝐬𝐬𝐚𝐠𝐠𝐢𝐨 𝐝𝐢 𝐚𝐝𝐝𝐢𝐨'}`,
@@ -534,47 +533,8 @@ export async function participantsUpdate({ id, participants, action }) {
                 } 
             }
             break
-        case 'promote':
-        case 'daradmin':
-        case 'promuovi':
-        case 'demote':
-        case 'quitarpoder':
-        case 'retrocedi':
-            if (chat.welcome) {
-                let groupMetadata = await this.groupMetadata(id) || (conn.chats[id] || {}).metadata
-                for (let user of participants) {
-                    let pp = fs.readFileSync('./src/profilo.png')
-                    try {
-                        pp = await this.profilePictureUrl(user, 'image')
-                    } catch (e) {
-                    } finally {
-                        let nomeDelBot = global.db.data.nomedelbot || `𝐁𝐢𝐱𝐛𝐲𝐁𝐨𝐭-𝐌𝐝 🔮`
-                        let apii = await this.getFile(pp)
-                        text = (action === 'promote' ? (chat.sPromote || this.spromote || conn.spromote || '@user ```è ora admin```') :
-                            (chat.sDemote || this.sdemote || conn.sdemote || '@user ```non è più admin```')).replace('@user', '@' + user.split('@')[0])
-                        this.sendMessage(id, { 
-                            text: text, 
-                            contextInfo:{ 
-                                mentionedJid:[user],
-                                forwardingScore: 99,
-                                isForwarded: true, 
-                               forwardedNewsletterMessageInfo: {
-                               newsletterJid: '120363175463922716@newsletter',
-                               serverMessageId: '', newsletterName: `${nomeDelBot}` },
-                               externalAdReply: {
-                                    "title": `${action === 'promote' ? '𝐌𝐞𝐬𝐬𝐚𝐠𝐠𝐢𝐨 𝐝𝐢 𝐩𝐫𝐨𝐦𝐨𝐳𝐢𝐨𝐧𝐞 👑' : '𝐌𝐞𝐬𝐬𝐚𝐠𝐠𝐢𝐨 𝐝𝐢 𝐫𝐞𝐭𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐨𝐧𝐞 🙇🏻‍♂️'}`,
-                                    "previewType": "PHOTO", 
-                                    "thumbnailUrl": ``, 
-                                    "thumbnail": apii.data,
-                                    "mediaType": 1
-                                }
-                            }
-                        }) 
-                    } 
-                } 
-            }
-            break
-    }
+     
+}
 }
 
 /**
@@ -603,7 +563,19 @@ export async function callUpdate(callUpdate) {
     if (nk.status == "offer") {
     let callmsg = await this.reply(nk.from, `ciao @${nk.from.split('@')[0]}, c'è anticall.`, false, { mentions: [nk.from] })
     //let data = global.owner.filter(([id, isCreator]) => id && isCreator)
-    let vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;𝐃𝚲𝐍𝕀𝚵𝐋͎💋;;;\nFN:𝐃𝚲𝐍𝕀𝚵𝐋͎💋\nORG:𝐃𝚲𝐍𝕀𝚵𝐋͎💋\nTITLE:\nitem1.TEL;waid=33760536110:+33 7 60 53 61 10\nitem1.X-ABLabel:𝐃𝚲𝐍𝕀𝚵𝐋͎💋\nX-WA-BIZ-DESCRIPTION:ofc\nX-WA-BIZ-NAME:𝐃𝚲𝐍𝕀𝚵𝐋͎💋\nEND:VCARD`
+    let vcard = `BEGIN:VCARD
+VERSION:3.0
+N:;ᘜ|ㄩ丂乇ᵒʷⁿᵉʳ;;;
+FN:ᘜ|ㄩ丂乇ᵒʷⁿᵉʳ
+ORG:ᘜ|ㄩ丂乇ᵒʷⁿᵉʳ
+TITLE:
+item1.TEL;waid=393445461546:+39 344 546 1546
+item1.X-ABLabel:ᘜ|ㄩ丂乇ᵒʷⁿᵉʳ
+X-WA-BIZ-DESCRIPTION:ofc
+X-WA-BIZ-NAME:ᘜ|ㄩ丂乇ᵒʷⁿᵉʳ
+END:VCARD`;
+
+console.log(vcard);
     await this.sendMessage(nk.from, { contacts: { displayName: 'Unlimited', contacts: [{ vcard }] }}, {quoted: callmsg})
     await this.updateBlockStatus(nk.from, 'block')
     }
@@ -639,13 +611,13 @@ export async function deleteUpdate(message) {
 }
 global.dfail = (type, m, conn) => {
     let msg = {
-        rowner: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐝𝐢𝐬𝐩𝐨𝐧𝐢𝐛𝐢𝐥𝐞 𝐬𝐨𝐥𝐨 𝐩𝐞𝐫 𝐨𝐰𝐧𝐞𝐫 🕵🏻‍♂️',
-        owner: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐝𝐢𝐬𝐩𝐨𝐧𝐢𝐛𝐢𝐥𝐞 𝐬𝐨𝐥𝐨 𝐩𝐞𝐫 𝐨𝐰𝐧𝐞𝐫 🕵🏻‍♂️',
+        rowner: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐬𝐨𝐥𝐨 𝐩𝐞𝐫 𝐨𝐰𝐧𝐞𝐫 🕵🏻‍♂️',
+        owner: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐬𝐨𝐥𝐨 𝐩𝐞𝐫 𝐨𝐰𝐧𝐞𝐫 🕵🏻‍♂️',
         mods: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐥𝐨 𝐩𝐨𝐬𝐬𝐨𝐧𝐨 𝐮𝐭𝐢𝐥𝐢𝐳𝐳𝐚𝐫𝐞 𝐬𝐨𝐥𝐨 𝐚𝐝𝐦𝐢𝐧 𝐞 𝐨𝐰𝐧𝐞𝐫 ⚙️',
         premium: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐩𝐞𝐫 𝐦𝐞𝐦𝐛𝐫𝐢 𝐩𝐫𝐞𝐦𝐢𝐮𝐦 ✅',
         group: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐩𝐮𝐨𝐢 𝐮𝐭𝐢𝐥𝐢𝐳𝐳𝐚𝐫𝐥𝐨 𝐢𝐧 𝐮𝐧 𝐠𝐫𝐮𝐩𝐩𝐨 👥',
         private: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐩𝐮𝐨𝐢 𝐮𝐭𝐢𝐥𝐢𝐳𝐳𝐚𝐫𝐥𝐨 𝐢𝐧 𝐜𝐡𝐚𝐭 𝐩𝐫𝐢𝐯𝐚𝐭𝐚 👤',
-        admin: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐝𝐢𝐬𝐩𝐨𝐧𝐢𝐛𝐢𝐥𝐞 𝐩𝐞𝐫 𝐬𝐨𝐥𝐢 𝐚𝐝𝐦𝐢𝐧 👑',
+        admin: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐩𝐞𝐫 𝐬𝐨𝐥𝐢 𝐚𝐝𝐦𝐢𝐧 👑',
         botAdmin: '𝐃𝐞𝐯𝐢 𝐝𝐚𝐫𝐞 𝐚𝐝𝐦𝐢𝐧 𝐚𝐥 𝐛𝐨𝐭 👑',
         restrict: '🔐 𝐑𝐞𝐬𝐭𝐫𝐢𝐜𝐭 𝐞 𝐝𝐢𝐬𝐚𝐭𝐭𝐢𝐯𝐚𝐭𝐨 🔐'}[type]
     if (msg) return conn.sendMessage(m.chat, { text: ' ', contextInfo:{
@@ -654,7 +626,7 @@ global.dfail = (type, m, conn) => {
   "previewType": "PHOTO",
   "thumbnail": fs.readFileSync('./accessdenied2.png'),
   "mediaType": 1,
-  "renderLargerThumbnail": true}}}, {quoted: m})
+  "renderLargerThumbnail": false}}}, {quoted: m})
 }
 let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
@@ -662,3 +634,4 @@ watchFile(file, async () => {
     console.log(chalk.redBright("Update 'handler.js'"))
     if (global.reloadHandler) console.log(await global.reloadHandler())
 })
+

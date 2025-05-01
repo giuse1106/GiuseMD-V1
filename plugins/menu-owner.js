@@ -66,10 +66,10 @@ END:VCARD`
 > ${_0x2b0a49}𝐚𝐝𝐝𝐨𝐰𝐧𝐞𝐫 @
 > ${_0x2b0a49}𝐝𝐞𝐥𝐨𝐰𝐧𝐞𝐫 @
 ────────────────
- ꙰ 𝟥𝟥𝟥 ꙰ 𝔹𝕆𝕋 ꙰ 
+꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」 
 `;
 
-  let _0x575cba = global.db.data.nomedelbot || " ꙰ 𝟥𝟥𝟥 ꙰ 𝔹𝕆𝕋 ꙰ ";
+  let _0x575cba = global.db.data.nomedelbot || " ꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」 ";
   
   await _0x4d8805.sendMessage(_0x1ece27.chat, {
     text: _0x3f08c2,
@@ -78,7 +78,7 @@ END:VCARD`
       forwardingScore: 1,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: "120363341274693350@newsletter",
+        newsletterJid: "120363418973546282@newsletter",
         serverMessageId: '',
         newsletterName: _0x575cba
       }

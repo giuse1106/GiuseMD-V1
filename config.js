@@ -1,4 +1,4 @@
-ioimport { watchFile, unwatchFile } from 'fs'
+import { watchFile, unwatchFile } from 'fs'
 import chalk from 'chalk'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
@@ -7,8 +7,8 @@ global.botnumber = ""
 global.confirmCode = ""
 
 global.owner = [
-    ['393792004234', 'Proprietario', true],
-    ['37379715748', 'Host Manager', true],
+    ['393445461546', '꧁ 👑 Proprietario¹ 👑꧂', true],
+    ['393272790038', '꧁ 👑 Proprietario² 👑꧂', true],
 ] //Numero degli owner
 
 //────────────────────────────
@@ -60,9 +60,9 @@ global.author = '𝐌𝐝'
 
 //────────────────────────────
 
-global.vs = '5.𝟎'
+global.vs = '1.𝟎'
 
-global.nomebot = ' ꙰ 𝟥𝟥𝟥 ꙰ 𝔹𝕆𝕋 ꙰ '
+global.nomebot = '꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」'
 
 global.multiplier = 69 
 global.maxwarn = '4' 

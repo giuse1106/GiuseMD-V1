@@ -1,0 +1,91 @@
+import fetch from 'node-fetch';
+
+const owners = ["393445461546@s.whatsapp.net", "27620870446@s.whatsapp.net", "393272790038@s.whatsapp.net"];
+const bots = ["390813657301@s.whatsapp.net", "19173829810@s.whatsapp.net"];
+
+let handler = async (m, { conn, text }) => {
+    try {
+        let userId;
+
+        if (text) {
+            userId = text.replace(/[^0-9]/g, '') + '@s.whatsapp.net';
+            if (!global.db.data.users[userId]) {
+                throw '*L\'utente taggato non è registrato nel database.*';
+            }
+        } else if (m.quoted && m.quoted.sender) {
+            userId = m.quoted.sender;
+            if (!global.db.data.users[userId]) {
+                throw '*L\'utente a cui hai risposto non è registrato nel database.*';
+            }
+        } else {
+            userId = m.sender;
+        }
+
+        let userData = global.db.data.users[userId];
+        let userBlasphemy = userData.blasphemy || 0;
+        let userWarns = userData.warn || 0;
+
+        if (!userData) throw '*L\'utente non ha ancora inviato messaggi.*';
+
+        let userInstagram = userData.instagram ? `instagram.com/${userData.instagram}` : 'Non impostato';
+
+        let profileMessage = `———————————————
+👤 *Utente: ${userData.name || 'Sconosciuto'}*
+💬 *Messaggi: ${userData.messaggi || 0}*
+⚠️ *Warns: ${userWarns}/3*
+🤬 *Bestemmie: ${userBlasphemy}*
+📸 *Instagram:* ${userInstagram}
+———————————————
+꧁  *Versione* ${global.vs || 'Sconosciuta'} ꧂ `;
+
+        let profilePicUrl = await conn.profilePictureUrl(userId, 'image').catch(() => 'https://telegra.ph/file/22b3e3d2a7b9f346e21b3.png');
+        let imageBuffer = await fetch(profilePicUrl).then(res => res.buffer());
+
+        // Embed di posizione
+        let locationEmbed = {
+            key: {
+                participants: "0@s.whatsapp.net",
+                remoteJid: "status@broadcast",
+                fromMe: false,
+                id: "ProfilePic"
+            },
+            message: {
+                locationMessage: {
+                    name: "👤 𝐈𝐧𝐟𝐨 𝐔𝐭𝐞𝐧𝐭𝐞",
+                    jpegThumbnail: imageBuffer,
+                    vcard: "BEGIN:VCARD\nVERSION:3.0\nN:;User;;;\nFN:User\nORG:Profile Picture\nEND:VCARD"
+                }
+            },
+            participant: '0@s.whatsapp.net'
+        };
+
+        await conn.sendMessage(m.chat, {
+            text: profileMessage,
+            contextInfo: {
+                mentionedJid: [userId],
+                externalAdReply: {
+                    title: `👤 ${userData.name || 'Sconosciuto'} | 💬 ${userData.messaggi} | 🤬 ${userBlasphemy}`,
+                    body: `Messaggi: ${userData.messaggi || 0}`,
+                    mediaType: 1,
+                    renderLargerThumbnail: false,
+                    thumbnail: imageBuffer,
+                    sourceUrl: `${userInstagram}`.startsWith('instagram.com') ? `https://${userInstagram}` : `https://instagram.com/${userInstagram}`
+                },
+                forwardingScore: 1,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '120363418973546282@newsletter',
+                    serverMessageId: '',
+                    newsletterName: global.config?.bot?.name || '꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」'
+                }
+            }
+        }, { quoted: locationEmbed, m });
+
+    } catch (error) {
+        console.error("Errore nel comando info minimalista:", error);
+        conn.reply(m.chat, "❌ Errore nell'esecuzione del comando!", m);
+    }
+};
+
+handler.command = /^(info)$/i;
+export default handler;
