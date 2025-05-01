@@ -4,7 +4,7 @@ await m.react('🕓')
 if (conn.user.jid == conn.user.jid) {
   try {
     // Sostituisci 'nome-del-tuo-branch' con il nome del branch principale del tuo repository (es. 'main' o 'master')
-    let stdout = execSync('git pull origin nome-del-tuo-branch' + (m.fromMe && text ? ' ' + text : ''))
+    let stdout = execSync('git pull origin main + (m.fromMe && text ? ' ' + text : ''))
     await conn.reply(m.chat, stdout.toString(), m)
     await m.react('✅')
   } catch (error) {
