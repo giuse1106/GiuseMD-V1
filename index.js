@@ -27,7 +27,11 @@ const animatedMessage = (text, font = 'block', colors = ['cyan', 'blue'], align 
 console.clear();
 animatedMessage('Giuse\nBot', 'block', ['magenta', 'cyan']);
 console.log('\n🔥 Sistema in avvio...');
-console.log('⏳ Preparazione dei moduli...\n');
+console.log('⏳ Preparazione dei moduli...');
+console.log('©️ Crediti & Supporto bot:');
+console.log('1️⃣ https://whatsapp.com/channel/0029Vb6YYdN6LwHeloTW8409');
+console.log('2️⃣ https://whatsapp.com/channel/0029VaitzuD3mFYDnJJNWH3Q');
+console.log('⚠️ Per qualsiasi informazione, contatta: +39 344 546 1546\n');
 
 // Variabile per controllo dello stato
 let isRunning = false;
