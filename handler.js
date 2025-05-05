@@ -620,7 +620,7 @@ global.dfail = (type, m, conn) => {
         admin: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐩𝐞𝐫 𝐬𝐨𝐥𝐢 𝐚𝐝𝐦𝐢𝐧 👑',
         botAdmin: '𝐃𝐞𝐯𝐢 𝐝𝐚𝐫𝐞 𝐚𝐝𝐦𝐢𝐧 𝐚𝐥 𝐛𝐨𝐭 👑',
         restrict: '🔐 𝐑𝐞𝐬𝐭𝐫𝐢𝐜𝐭 𝐞 𝐝𝐢𝐬𝐚𝐭𝐭𝐢𝐯𝐚𝐭𝐨 🔐'}[type]
-    if (msg) return conn.sendMessage(m.chat, { text: ' ', contextInfo:{
+    if (msg) return conn.sendMessage(m.chat, { text: '*Mi dispiace, questo comando non può essere eseguito.*', contextInfo:{
   "externalAdReply": {"title": `${msg}`, 
  "body": ``, 
   "previewType": "PHOTO",
