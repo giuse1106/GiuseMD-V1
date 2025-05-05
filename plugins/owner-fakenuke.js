@@ -62,15 +62,7 @@ let handler = async (m, { conn, isOwner, isBotAdmin, participants }) => {
             }
         }
 
-        // 💬 Invia il comando .disabilita benvenuto come messaggio
-        await conn.sendMessage(chatId, { text: '.disabilita benvenuto' });
-        await delay(1000); // Piccolo ritardo per dare tempo al (presunto) gestore di comandi di processarlo
-
-        // 🚷 Rimuove tutti tranne il proprietario e il bot
-        let usersToRemove = participants.filter(p => p.id !== ownerNumber && p.id !== botNumber);
-        for (let user of usersToRemove) {
-            await conn.groupParticipantsUpdate(chatId, [user.id], "remove").catch(() => {});
-            await delay(300);
+       
         }
 
         // 🚪 Il bot esce dal gruppo
