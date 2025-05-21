@@ -8,6 +8,6 @@ function messaggioAttivita() {
 messaggioAttivita();
 
 // Imposta l'intervallo per eseguire la funzione ogni 25 secondi (25000 millisecondi)
-setInterval(messaggioAttivita, 25000);
+setInterval(messaggioAttivita, 5000);
 
-console.log("Il bot mostrerà un messaggio di attività ogni 25 secondi.");
+console.log("Il bot mostrerà un messaggio di attività ogni 5 secondi.");
