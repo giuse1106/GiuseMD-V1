@@ -6,7 +6,7 @@ const handler = async (m, { conn }) => {
   // Esempio: if (!global.db || !global.db.data) global.db = { data: { chats: {} } };
 
   const user = global.db.data.users; // Questa variabile 'user' non sembra essere usata, puoi rimuoverla se non serve
-  const nomebot = "IL TUO BOT"; // <<<<< ASSICURATI DI DEFINIRE O PASSARE QUESTA VARIABILE
+  const nomebot = "꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」"; // <<<<< ASSICURATI DI DEFINIRE O PASSARE QUESTA VARIABILE
 
   let txt = `𝐋𝐈𝐒𝐓𝐀 𝐃𝐄𝐈 𝐆𝐑𝐔𝐏𝐏𝐈 𝐃𝐈 ${nomebot}`;
   const fkontak = {
