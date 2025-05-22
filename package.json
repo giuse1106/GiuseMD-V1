@@ -1,7 +1,7 @@
 {
-  "name": "Bixby-Bot-MD",
-  "version": "2.2",
-  "description": "Nada",
+  "name": "giusemd",
+  "version": "1.0",
+  "description": "Miglior whatsapp bot italiano🇮🇹",
   "main": "index.js",
   "type": "module",
   "directories": {
@@ -29,6 +29,7 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "express": "^4.19.2",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@bochilteam/scraper": "^4.2.4",
     "@brandond/findthelyrics": "^2.0.5",
