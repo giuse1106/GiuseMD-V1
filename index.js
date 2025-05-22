@@ -6,13 +6,13 @@ import { watchFile, unwatchFile } from 'fs';
 import cfonts from 'cfonts';
 import { createInterface } from 'readline';
 import yargs from 'yargs';
+import express from 'express';
 
 // Configurazioni iniziali
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(__dirname);
 const { name, author } = require(join(__dirname, './package.json'));
 const rl = createInterface(process.stdin, process.stdout);
-const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
