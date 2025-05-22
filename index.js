@@ -12,6 +12,19 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(__dirname);
 const { name, author } = require(join(__dirname, './package.json'));
 const rl = createInterface(process.stdin, process.stdout);
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Bot WhatsApp sta funzionando!');
+});
+
+app.listen(port, () => {
+  console.log(`Server web in ascolto sulla porta ${port}`);
+});
+
+// ... il resto del tuo codice del bot WhatsApp
 
 // Funzione per messaggi animati
 const animatedMessage = (text, font = 'block', colors = ['cyan', 'blue'], align = 'center') => {
