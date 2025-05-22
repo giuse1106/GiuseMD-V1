@@ -19,7 +19,7 @@ let handler = async (m, { conn, command, args, text, usedPrefix }) => {
             additionalText = '𝐝𝐞𝐥 𝐯𝐢𝐝𝐞𝐨'
         }
         
-        let nomeDelBot = global.db.data.nomedelbot || `𝐁𝐢𝐱𝐛𝐲𝐁𝐨𝐭-𝐌𝐝 🔮`
+        let nomeDelBot = global.db.data.nomedelbot || `꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」`
         
 const BixbyChar = (str) => {
 return str.split('').map(char => {
@@ -89,7 +89,7 @@ default: return char;
 - 🟢 𝐈𝐧𝐯𝐢𝐨 ${additionalText} 𝐢𝐧 𝐜𝐨𝐫𝐬𝐨...
 ──────────────`);
         
-        await conn.sendMessage(m.chat, { text: formattedText, contextInfo: { externalAdReply: { title: yt_play[0].title, body: nomeDelBot, thumbnailUrl: yt_play[0].thumbnail, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true } } }, { quoted: m });
+        await conn.sendMessage(m.chat, { text: formattedText, contextInfo: { externalAdReply: { title: yt_play[0].title, body: nomeDelBot, thumbnailUrl: yt_play[0].thumbnail, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: false } } }, { quoted: m });
         
         if (command == 'play') {        
             try {
