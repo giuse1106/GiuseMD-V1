@@ -79,6 +79,7 @@ const handler = async (m, { conn, usedPrefix }) => {
 🧠 *Velocità:* ${latency.toFixed(2)} ms
 📊 *RAM:* ${format(totalmem() - freemem())} / ${format(totalmem())}
 📗 *RAM Libera:* ${format(freemem())}
+🔗 *Status:* https://stats.uptimerobot.com/fsZ8sFRH1v
 
 `.trim()
 
