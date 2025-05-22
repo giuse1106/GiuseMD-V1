@@ -14,47 +14,62 @@
 
 
 ### ` 𝐕𝐄𝐑𝐒𝐈𝐎𝐍𝐄 𝐃𝐈 𝐌𝐓-𝐌𝐀𝐍𝐀𝐆𝐄𝐑 𝐍𝐄𝐂𝐂𝐄𝐒𝐒𝐀𝐑𝐈𝐀 𝐏𝐄𝐑 𝐋'𝐄𝐃𝐈𝐓 𝐃𝐄𝐋 𝐁𝐎𝐓 `
-https://mt-manager.en.softonic.com/android?psafe_param=1&utm_source=SEM&utm_medium=paid&utm_campaign=IT_Italy_DSA_mobile&gad_source=1&gclid=CjwKCAiA6aW6BhBqEiwA6KzDc6U6GJcHp-i1gZZS5OFs6OL8vXMvOx8zSo4Gm31AZcV1RgmVQgWO2BoClRIQAvD_BwE 
+https://mt-manager.en.softonic.com/android?psafe_param=1&utm_source=SEM&utm_medium=paid&utm_campaign=IT_Italy_DSA_mobile&gad_source=1&gclid=CjwKCAiA6aW6BhBqEiwA6KzDc6U6GJcHp-i1gZZS5OFs6OL8vXMvOx8zSo4Gm31AZcV1RgmVQgWO2BoClRIQAvD_BwE
+
 ══════ •⊰✦⊱• ══════
 
  ### `𝐂𝐨𝐦𝐚𝐧𝐝𝐢 𝐩𝐞𝐫 𝐬𝐜𝐚𝐫𝐢𝐜𝐚𝐫𝐞 𝐁𝐨𝐭` 
 
 
 
-``` 
-termux-setup-storage 
-
+```
+termux-setup-storage
+```
+═════ •⊰✦⊱• ══════
+```
 pkg install ffmpeg -y
-
-
- pkg install git -y
-
-
+```
+═════ •⊰✦⊱• ══════
+```
+pkg install git -y
+```
+═════ •⊰✦⊱• ══════
+```
 pkg upgrade -y && pkg update -y
-
-
+```
+═════ •⊰✦⊱• ══════
+```
  pkg install yarn
-
-
+```
+═════ •⊰✦⊱• ══════
+```
  pkg install imagemagick -y
-
-
+```
+═════ •⊰✦⊱• ══════
+```
  cd /sdcard && rm -rf giusemd && git clone https://github.com/giuse1106/giusemd.git
-
-
- cd /sdcard/Gab
-
-
+```
+═════ •⊰✦⊱• ══════
+```
+ cd /sdcard/giusemd
+```
+═════ •⊰✦⊱• ══════
+```
  yarn install 
-
-
+```
+═════ •⊰✦⊱• ══════
+```
  npm install
-
-
+```
+═════ •⊰✦⊱• ══════
+```
  npm update
-
+```
+═════ •⊰✦⊱• ══════
+```
  npm start
 ```
+═════ •⊰✦⊱• ══════
 
  ---------------------------------------------
  ### `✦ 𝐍𝐎𝐓𝐄` 
