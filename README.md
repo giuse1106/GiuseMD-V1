@@ -2,7 +2,7 @@
 ![GiuseMD](https://img.shields.io/badge/GiuseMD-Online-brightgreen?style=flat-square)  
 ![GitHub repo size](https://img.shields.io/github/repo-size/giuse1106/giusemd?color=blue&label=Repo%20Size)  
 ![Contributors](https://img.shields.io/github/contributors/giuse1106/giusemd?color=yellow)  
-![GitHub stars](https://img.shields.io/github/stars/giuse1106/giusemdstyle=social)  
+![GitHub stars](https://img.shields.io/github/stars/giuse1106/giusemds?tyle=social)  
 
   
  ----------------------------------------------
