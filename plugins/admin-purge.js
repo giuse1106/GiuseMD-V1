@@ -56,7 +56,7 @@ const handler = async (m, { conn, text, isGroupAdmin, isSuperAdmin }) => {
 
 handler.help = ['.purge <numero>'];
 handler.tags = ['group', 'admin'];
-handler.command = /^purge$/i;
+handler.command = ['purge'];
 handler.group = true;
 handler.admin = true;
 handler.botAdmin = true; // Il bot deve essere admin per eliminare i messaggi
