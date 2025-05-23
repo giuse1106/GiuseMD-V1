@@ -17,7 +17,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.send('Bot WhatsApp sta funzionando!');
+  res.send(`Il bot WhatsApp GIUSEMD è attivo sulla porta "3000" per qualunque problema contattare l'owner al seguente link: https://wa.me/393445461546`);
 });
 
 app.listen(port, () => {
