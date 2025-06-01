@@ -212,8 +212,14 @@ let handler = async (m, {
         if (connection === 'close') {
           console.log(statusCode);
           if (statusCode == 405) { // Unauthorized or invalid session
+          // Aggiungi questo controllo:
+          if (fs.existsSync(`${currentSessionPath}/creds.json`)) {
             await fs.unlinkSync(`${currentSessionPath}/creds.json`);
-            return await m.reply("ⓘ 𝐈𝐧𝐯𝐢𝐚 𝐧𝐮𝐨𝐯𝐚𝐦𝐞𝐧𝐭𝐞 𝐢𝐥 𝐜𝐨𝐦𝐚𝐧𝐝𝐨.");
+          } else {
+            console.log(`ⓘ Il file creds.json non esiste in ${currentSessionPath}, impossibile eliminarlo.`);
+          }
+          return await m.reply("ⓘ 𝐈𝐧𝐯𝐢𝐚 𝐧𝐮𝐨𝐯𝐚𝐦𝐞𝐧𝐭𝐞 𝐢𝐥 𝐜𝐨𝐦𝐚𝐧𝐝𝐨.");
+        }
           }
           if (statusCode === DisconnectReason.restartRequired) {
             startBotConnection();
