@@ -53,7 +53,7 @@ const handler = async (_0x242462, {
       'quoted': _0x242462
     });
   }
-  let _0xb6609d = global.db.data.nomedelbot || " ꙰ 𝟥𝟥𝟥 ꙰ 𝔹𝕆𝕋 ꙰ ";
+  let _0xb6609d = global.db.data.nomedelbot || "꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」";
   let _0xc3323b = {
     'key': {
       'participants': "0@s.whatsapp.net",
