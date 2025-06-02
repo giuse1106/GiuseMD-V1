@@ -14,7 +14,7 @@ handler.all = async function (m) {
   let chat = global.db.data.chats[m.chat]
   let name = conn.getName(m.sender)
 
-  if (/^@+393445461546|@393445461546$|@+19183829810|@19173829810$/i.test(m.text)) {
+  if (/^@+393445461546|@393445461546$|@+19183829810|@19173829810$|@+380662815377|@380662815377$/i.test(m.text)) {
     if (m.sender === conn.user.jid) return
 
 
