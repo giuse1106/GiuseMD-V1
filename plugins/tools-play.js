@@ -6,103 +6,102 @@ import { promisify } from 'util';
 const execPromise = promisify(exec);
 
 let handler = async (m, { conn, command, args, text, usedPrefix }) => {
-    if (!text) throw `> ⓘ 𝐔𝐬𝐨 𝐝𝐞𝐥 𝐜𝐨𝐦𝐚𝐧𝐝𝐨:\n> ${usedPrefix + command} Daddy Yankee - Con Calma`;
+    if (!text) {
+        throw `> 🎧 **Per scaricare audio da YouTube**\n> ℹ️ Usa: \`${usedPrefix + command} Titolo della canzone o Link YouTube\``;
+    }
 
     try {
-        const yt_play = await search(args.join(" "));
-        let additionalText = '';
+        await m.reply(`*🎶 Ricerca audio per:* _"${text}"_`);
 
-        if (command === 'play') {
-            additionalText = `𝐝𝐞𝐥𝐥'𝐚𝐮𝐝𝐢𝐨`;
-        } else if (command === 'video') {
-            additionalText = '𝐝𝐞𝐥 𝐯𝐢𝐝𝐞𝐨';
+        const searchResults = await yts.search({ query: args.join(" "), hl: "it", gl: "IT" });
+        if (!searchResults.videos.length) {
+            throw `Non ho trovato nessun risultato per: _"${text}"_ 😔`;
         }
 
-        // Nuovo nome del bot
+        const yt_info = searchResults.videos[0]; // Prendiamo il primo risultato
+        const videoUrl = yt_info.url;
+        const videoTitle = yt_info.title;
+        const videoDuration = secondString(yt_info.duration.seconds);
+        const thumbnailUrl = yt_info.thumbnail;
+        const authorName = yt_info.author.name;
+
         let nomeDelBot = `꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」`;
 
-        const BixbyChar = (str) => {
-            return str.split('').map(char => {
-                switch (char) {
-                    case 'A': return '𝐀'; case 'B': return '𝐁'; case 'C': return '��'; case 'D': return '𝐃'; case 'E': return '𝐄';
-                    case 'F': return '𝐅'; case 'G': return '𝐆'; case 'H': return '𝐇'; case 'I': return '𝐈'; case 'J': return '𝐉';
-                    case 'K': return '𝐊'; case 'L': return '𝐋'; case 'M': return '𝐌'; case 'N': return '𝐍'; case 'O': return '𝐎';
-                    case 'P': return '𝐏'; case 'Q': return '𝐐'; case 'R': return '𝐑'; case 'S': return '𝐒'; case 'T': return '𝐓';
-                    case 'U': return '𝐔'; case 'V': return '𝐕'; case 'W': return '𝐖'; case 'X': return '𝐗'; case 'Y': return '𝐘';
-                    case 'Z': return '𝐙'; case 'a': return '𝐚'; case 'b': return '𝐛'; case 'c': return '𝐜'; case 'd': return '𝐝';
-                    case 'e': return '𝐞'; case 'f': return '𝐟'; case 'g': return '𝐠'; case 'h': return '𝐡'; case 'i': return '𝐢';
-                    case 'j': return '𝐣'; case 'k': return '𝐤'; case 'l': return '𝐥'; case 'm': return '𝐦'; case 'n': return '𝐧';
-                    case 'o': return '𝐨'; case 'p': return '𝐩'; case 'q': return '𝐪'; case 'r': return '𝐫'; case 's': return '𝐬';
-                    case 't': return '��'; case 'u': return '𝐮'; case 'v': return '𝐯'; case 'w': return '𝐰'; case 'x': return '𝐱';
-                    case 'y': return '𝐲'; case 'z': return '𝐳';
-                    default: return char;
+        const confirmationMessage = `
+*🎵 Dettagli Audio Trovato:*
+
+*🎤 Artista:* ${authorName}
+*📄 Titolo:* ${videoTitle}
+*⏳ Durata:* ${videoDuration}
+*🔗 Link:* ${videoUrl}
+
+*Inviando l'audio... attendi un momento!*
+`;
+
+        await conn.sendMessage(m.chat, {
+            text: confirmationMessage,
+            contextInfo: {
+                externalAdReply: {
+                    title: videoTitle,
+                    body: nomeDelBot,
+                    thumbnailUrl: thumbnailUrl,
+                    mediaType: 1,
+                    showAdAttribution: false,
+                    renderLargerThumbnail: true
                 }
-            }).join('');
-        };
-
-        const formattedText = BixbyChar(`
-──────────────
-- 🗣 ${BixbyChar(yt_play[0].author.name)}
-- 🔖 ${BixbyChar(yt_play[0].title)}
-- 🕛 ${secondString(yt_play[0].duration.seconds)}
-- 🟢 𝐈𝐧𝐯𝐢𝐨 ${additionalText} 𝐢𝐧 𝐜𝐨𝐫𝐬𝐨...
-──────────────`);
-
-        await conn.sendMessage(m.chat, { text: formattedText, contextInfo: { externalAdReply: { title: yt_play[0].title, body: nomeDelBot, thumbnailUrl: yt_play[0].thumbnail, mediaType: 1, showAdAttribution: false, renderLargerThumbnail: true } } }, { quoted: m });
-
-        const videoUrl = yt_play[0].url;
-        const videoTitle = yt_play[0].title.replace(/[^\w\s.-]/gi, ''); // Pulisce il titolo per nomi file
-        const thumbnail = await fetch(yt_play[0].thumbnail);
-
-        if (command == 'play') {
-            try {
-                // Comando yt-dlp per scaricare solo l'audio in mp3
-                const audioFilePath = `./${videoTitle}_audio.mp3`;
-                await execPromise(`yt-dlp -x --audio-format mp3 -o "${audioFilePath}" "${videoUrl}"`);
-                
-                await conn.sendMessage(m.chat, { audio: { url: audioFilePath }, mimetype: 'audio/mpeg', fileName: `${videoTitle}.mp3` }, { quoted: m });
-            } catch (error) {
-                console.error("Errore durante il download dell'audio con yt-dlp:", error);
-                throw `Si è verificato un errore durante il download dell'audio. Riprova più tardi.`;
             }
+        }, { quoted: m });
+
+        // Pulizia del titolo per il nome del file
+        const safeTitle = videoTitle.replace(/[^\w\s.-]/gi, '').substring(0, 100); // Limita la lunghezza per sicurezza
+        const audioFilePath = `./temp_audio_${Date.now()}.mp3`; // Usa un nome file temporaneo unico
+
+        try {
+            // Esecuzione di yt-dlp per scaricare solo l'audio in mp3
+            const { stdout, stderr } = await execPromise(`yt-dlp -x --audio-format mp3 -o "${audioFilePath}" "${videoUrl}"`);
+            
+            if (stderr && !stderr.includes('WARNING')) { // Ignora i warning minori
+                console.error('yt-dlp stderr:', stderr);
+                // Puoi decidere di lanciare un errore qui se il stderr è significativo
+            }
+
+            await conn.sendMessage(m.chat, {
+                audio: { url: audioFilePath },
+                mimetype: 'audio/mpeg',
+                fileName: `${safeTitle}.mp3`,
+                caption: `*🎵 Ecco il tuo audio:*\n*Titolo:* ${videoTitle}\n*Durata:* ${videoDuration}\n\n_Powered by ${nomeDelBot}_`
+            }, { quoted: m });
+
+            // Elimina il file temporaneo dopo l'invio
+            await execPromise(`rm "${audioFilePath}"`);
+
+        } catch (downloadError) {
+            console.error("Errore durante il download o l'invio dell'audio con yt-dlp:", downloadError);
+            throw `Si è verificato un problema nel scaricare l'audio. Riprova più tardi.`;
         }
 
-        if (command == 'video') {
-            try {
-                // Comando yt-dlp per scaricare il video in mp4
-                const videoFilePath = `./${videoTitle}_video.mp4`;
-                await execPromise(`yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -o "${videoFilePath}" "${videoUrl}"`);
-                
-                await conn.sendMessage(m.chat, { video: { url: videoFilePath }, fileName: `${videoTitle}.mp4`, mimetype: 'video/mp4', caption: `${videoTitle}`, thumbnail: thumbnail.buffer() }, { quoted: m });
-            } catch (error) {
-                console.error("Errore durante il download del video con yt-dlp:", error);
-                throw `Si è verificato un errore durante il download del video. Riprova più tardi.`;
-            }
-        }
     } catch (error) {
-        console.error("Errore generale nell'handler:", error);
-        throw `Si è verificato un errore: ${error.message || error}`;
+        console.error("Errore nell'handler del comando play:", error);
+        await m.reply(`*❌ Errore:* ${error.message || 'Si è verificato un errore inatteso.'}`);
     }
-}
+};
 
-handler.command = ['play', 'video'];
+handler.help = ['play <titolo/link>'];
+handler.tags = ['downloader'];
+handler.command = ['play']; // Il comando è solo 'play' ora
+handler.group = false; // Puoi decidere se può essere usato solo in gruppi o no
+handler.private = false; // Puoi decidere se può essere usato solo in chat private o no
+handler.fail = null;
 
 export default handler;
 
-// Funzioni di utilità (rimaste invariate)
+// Funzione di utilità per la ricerca (non modificata significativamente)
 async function search(query, options = {}) {
     const search = await yts.search({ query, hl: "it", gl: "IT", ...options });
     return search.videos;
 }
 
-function MilesNumber(number) {
-    const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-    const rep = "$1.";
-    let arr = number.toString().split(".");
-    arr[0] = arr[0].replace(exp, rep);
-    return arr[1] ? arr.join(".") : arr[0];
-}
-
+// Funzione per formattare la durata (non modificata)
 function secondString(seconds) {
     seconds = Number(seconds);
     var d = Math.floor(seconds / (3600 * 24));
