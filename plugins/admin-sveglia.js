@@ -12,19 +12,11 @@ const handler = async (m, { conn, participants, groupMetadata, args }) => {
     let message = pesan ? pesan : '❌ Nessun messaggio fornito';
 
     let text = `
-╭════════════════════════╮
-│ ⚠️ 𝐒𝐕𝐄𝐆𝐋𝐈𝐀 𝐀𝐃𝐌𝐈𝐍 ⚠️ │
-╰════════════════════════╯
-
 ✎ *Messaggio:*  
 ➥ ${message}
 
 ♔ *Lista Admin:*  
 ${listAdmin}
-
-╭════════════════════════╮
-│    🔥 333 Bot 🔥    │
-╰════════════════════════╯
 `.trim();
 
     conn.reply(m.chat, text, m, { mentions: [...groupAdmins.map(v => v.id), owner] });
@@ -32,7 +24,7 @@ ${listAdmin}
 
 handler.command = ['admins', '@admins', 'dmins'];
 handler.tags = ['group'];
-handler.help = ['admins <messaggio>'];
+handler.help = ['tagadm <messaggio>'];
 handler.group = true;
 
 export default handler;
