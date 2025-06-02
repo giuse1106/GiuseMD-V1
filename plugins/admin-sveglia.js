@@ -22,9 +22,10 @@ ${listAdmin}
     conn.reply(m.chat, text, m, { mentions: [...groupAdmins.map(v => v.id), owner] });
 };
 
-handler.command = ['admins', '@admins', 'dmins'];
+handler.command = ['tagadm', '@admins', 'dmins'];
 handler.tags = ['group'];
 handler.help = ['tagadm <messaggio>'];
 handler.group = true;
+handler.admin = true;
 
 export default handler;
