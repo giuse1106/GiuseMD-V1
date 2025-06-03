@@ -1,7 +1,7 @@
 {
-  "name": "Bixby-Bot-MD",
-  "version": "2.2",
-  "description": "Nada",
+  "name": "GiuseMD-V1",
+  "version": "1.0",
+  "description": "https://github.com/giuse1106/GiuseMD-V1",
   "main": "index.js",
   "type": "module",
   "directories": {
