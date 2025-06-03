@@ -65,7 +65,7 @@ global.author = '𝐌𝐝'
 
 //────────────────────────────
 
-global.vs = 'Finale'
+global.vs = '1.0'
 
 global.nomebot = '꧁ ĝ̽̓̀͑ỉ͔͖̜͌ư̡͕̭̇s̠҉͍͊ͅẹ̿͋̒̕ẹ̿͋̒̕ ꧂ 「 ᵇᵒᵗ 」'
 
