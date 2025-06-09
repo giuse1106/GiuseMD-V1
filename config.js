@@ -7,7 +7,7 @@ global.botnumber = ""
 global.confirmCode = ""
 
 global.owner = [
-    ['393445461546', '꧁ 👑 Proprietario¹ 👑꧂', true],
+    ['xxxxxxxx', '꧁ 👑 Proprietario¹ 👑꧂', true],
     ['393272790038', '꧁ 👑 Proprietario² 👑꧂', true],
     ['254775945005', '꧁ 👑 Proprietario³ 👑꧂', true],
     ['19173829810', '꧁ 👑 Proprietario⁴ 👑꧂', true],
